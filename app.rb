@@ -2,7 +2,7 @@ require 'rubygems'
 require "sinatra"
 require "json"
 
-require_relative("./models/project_table")
+require_relative("./models/hash_cleaner")
 
 set :public_folder, 'public'
 get '/' do
@@ -17,8 +17,8 @@ end
 get '/project-table' do
     # content_type :json
     master_sheet = JSON.parse(File.read('public/master.json'))
-    @project_table = ProjectTable.new();
-    JSON.generate(@project_table.move_keys(master_sheet))
+    @HashCleaner = HashCleaner.new();
+    JSON.generate(@HashCleaner.move_keys(master_sheet))
     # File.read('public/master.json')
 end
 

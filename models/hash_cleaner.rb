@@ -1,6 +1,6 @@
 require "json"
 
-class ProjectTable
+class HashCleaner
 
   def initialize()
     @my_array = []
@@ -22,4 +22,4 @@ class ProjectTable
 
 end
 
-ProjectTable.new
+HashCleaner.new
