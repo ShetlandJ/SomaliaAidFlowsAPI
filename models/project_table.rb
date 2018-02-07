@@ -4,17 +4,13 @@ class ProjectTable
 
   def initialize()
     @my_array = []
-    # move_keys()
-    master_sheet = JSON.parse(File.read('../public/master.json'))
-
-    hash_cleaner(master_sheet[0])
   end
 
-  def move_keys()
-    master_sheet = JSON.parse(File.read('../public/master.json'))
-    for hashes in master_sheet
-      p hashes
+  def move_keys(json_file)
+    for hash in json_file
+      hash_cleaner(hash)
     end
+    return @my_array
   end
 
   def hash_cleaner(my_hash)
@@ -25,4 +21,5 @@ class ProjectTable
   end
 
 end
+
 ProjectTable.new
