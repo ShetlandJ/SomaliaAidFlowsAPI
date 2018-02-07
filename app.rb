@@ -3,6 +3,8 @@ require "sinatra"
 require "json"
 
 require_relative("./models/hash_cleaner")
+require_relative("./models/location_counter")
+
 
 set :public_folder, 'public'
 get '/' do
@@ -15,11 +17,15 @@ get '/project-page' do
 end
 
 get '/project-table' do
-    # content_type :json
     master_sheet = JSON.parse(File.read('public/master.json'))
     @HashCleaner = HashCleaner.new();
     JSON.generate(@HashCleaner.move_keys(master_sheet))
-    # File.read('public/master.json')
+end
+
+get '/fgs' do
+    master_sheet = JSON.parse(File.read('public/master.json'))
+    @LocationCounter = LocationCounter.new();
+    JSON.generate(@LocationCounter.return_all(master_sheet))
 end
 
 get '/envelopes' do
