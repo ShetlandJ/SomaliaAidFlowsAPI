@@ -32,7 +32,11 @@ class LocationCounter
     get_location("2017", location, json_file)
     get_location("2018", location, json_file)
 
-    @final_array.push(location => @location_array)
+    if (location === "fgs")
+      @final_array.push(location.upcase => @location_array)
+    else
+      @final_array.push(location => @location_array)
+    end
     return @final_array
   end
 
