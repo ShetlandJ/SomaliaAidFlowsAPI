@@ -5,7 +5,7 @@ get '/' do
     'Hello world!'
 end
 
-get '/master' do
+get '/project-page' do
     content_type :json
     File.read('public/master.json')
 end
