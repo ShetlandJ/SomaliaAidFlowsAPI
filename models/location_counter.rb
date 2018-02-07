@@ -8,11 +8,15 @@ class LocationCounter
   end
 
   def get_location(year, location, json_file)
+    p year
     total = 0
     counter = 0
     for hash in json_file
       hash.each do |key, value|
-        if (key == year+" - "+location && value > 0)
+        if ((key == year+" - "+"FGS" || key == year+" - "+"fgs") && value > 0)
+          total += value
+          counter += 1
+        elsif (key == year+" - "+location && value > 0)
           total += value
           counter += 1
         end
@@ -23,13 +27,12 @@ class LocationCounter
 
   end
 
-  def return_all(json_file)
-    get_location("2016", "FGS", json_file)
-    get_location("2017", "FGS", json_file)
-    get_location("2018", "FGS", json_file)
+  def return_all(json_file, location)
+    get_location("2016", location, json_file)
+    get_location("2017", location, json_file)
+    get_location("2018", location, json_file)
 
-
-    @final_array.push("FGS" => @location_array)
+    @final_array.push(location => @location_array)
     return @final_array
   end
 
