@@ -1,5 +1,3 @@
-require "json"
-
 class HashCleaner
 
   def initialize()
