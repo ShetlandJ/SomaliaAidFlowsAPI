@@ -1,6 +1,6 @@
 require 'rubygems'
 require "sinatra"
-require "sinatra/json"
+require "json"
 
 require_relative("./models/project_table")
 
@@ -18,7 +18,7 @@ get '/project-table' do
     # content_type :json
     master_sheet = JSON.parse(File.read('public/master.json'))
     @project_table = ProjectTable.new();
-    json @project_table.move_keys(master_sheet)
+    JSON.generate(@project_table.move_keys(master_sheet))
     # File.read('public/master.json')
 end
 
