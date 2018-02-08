@@ -5,6 +5,7 @@ class LocationCounter
   def initialize()
     @location_array = []
     @final_array = []
+    @country_hash = {}
   end
 
   def get_location(year, location, json_file)
@@ -22,23 +23,33 @@ class LocationCounter
         end
       end
 
+
     end
-    @location_array.push({year => total, "count" => counter})
+    @location_array.push(location => {year => total, "count" => counter})
+
 
   end
 
-  def return_all(json_file, location)
-    get_location("2016", location, json_file)
-    get_location("2017", location, json_file)
-    get_location("2018", location, json_file)
+  def return_all(json_file)
+    locations = ["FGS", "Benadir", "Galmudug", "Hiirshabelle", "Jubaland", "Puntland", "South West", "Somaliland", "Unattributed"]
 
-    if (location === "fgs")
-      @final_array.push(location.upcase => @location_array)
-    else
-      @final_array.push(location => @location_array)
+    counter = 0
+    for location in locations
+      get_location("2016", locations[counter], json_file)
+      get_location("2017", locations[counter], json_file)
+      get_location("2018", locations[counter], json_file)
+      counter += 1
+
+      # if (location === "fgs")
+      #   @final_array.push(location.upcase => @location_array)
+      # else
+      #   @final_array.push(location => @location_array)
+      # end
     end
-    return @final_array
+    return @location_array
   end
+
+
 
 end
 

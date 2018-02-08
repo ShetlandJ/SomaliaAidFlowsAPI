@@ -22,10 +22,10 @@ get '/project-table' do
     JSON.generate(@HashCleaner.move_keys(master_sheet))
 end
 
-get '/location/:location' do
+get '/location/' do
   master_sheet = JSON.parse(File.read('public/master.json'))
   @LocationCounter = LocationCounter.new();
-  my_json = @LocationCounter.return_all(master_sheet, params[:location])
+  my_json = @LocationCounter.return_all(master_sheet)
   JSON.generate(my_json)
 end
 
