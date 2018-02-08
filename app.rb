@@ -25,7 +25,7 @@ end
 get '/location/' do
   master_sheet = JSON.parse(File.read('public/master.json'))
   @LocationCounter = LocationCounter.new();
-  my_json = @LocationCounter.return_all(master_sheet)
+  my_json = @LocationCounter.location_loop(master_sheet)
   JSON.generate(my_json)
 end
 
