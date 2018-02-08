@@ -9,7 +9,6 @@ class LocationCounter
   end
 
   def get_location(year, location, json_file)
-    p year
     total = 0
     counter = 0
     for hash in json_file
@@ -22,34 +21,26 @@ class LocationCounter
           counter += 1
         end
       end
-
-
     end
     @location_array.push(location => {year => total, "count" => counter})
-
-
   end
 
   def return_all(json_file)
     locations = ["FGS", "Benadir", "Galmudug", "Hiirshabelle", "Jubaland", "Puntland", "South West", "Somaliland", "Unattributed"]
+    years = ["2016", "2017", "2018"]
+
 
     counter = 0
     for location in locations
-      get_location("2016", locations[counter], json_file)
-      get_location("2017", locations[counter], json_file)
-      get_location("2018", locations[counter], json_file)
+      for year in years
+        get_location(year, locations[counter], json_file)
+        # get_location("2017", locations[counter], json_file)
+        # get_location("2018", locations[counter], json_file)
+      end
       counter += 1
-
-      # if (location === "fgs")
-      #   @final_array.push(location.upcase => @location_array)
-      # else
-      #   @final_array.push(location => @location_array)
-      # end
     end
     return @location_array
   end
-
-
 
 end
 
