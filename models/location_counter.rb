@@ -7,7 +7,6 @@ class LocationCounter
     @location_array = []
     @final_array = {}
     @country_array = []
-    # create_location_object("FGS")
   end
 
   def get_location(year, location, json_file)
@@ -28,7 +27,7 @@ class LocationCounter
 
   def create_location_object(location, json_file)
     years = ["2016", "2017", "2018"]
-    # for location in @valid_place_names
+
     for year in years
       get_location(year, location, json_file)
     end
