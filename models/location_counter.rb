@@ -20,7 +20,7 @@ class LocationCounter
       end
       index += 1
     end
-    @country_array.push(year => {"total" => total, "count" => project_counter})
+    @country_array.push({"location" => location, "total" => total, "count" => project_counter})
 
   end
 
@@ -30,7 +30,7 @@ class LocationCounter
     # for year in years
       get_location(year, location, json_file)
     # end
-    @location_array.push(location => @country_array)
+    @location_array.push(@country_array)
     @country_array = []
 
   end
@@ -40,7 +40,7 @@ class LocationCounter
       create_location_object(location, json_file, year)
     end
 
-    return @location_array
+    return @location_array.flatten
   end
 
 

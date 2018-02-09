@@ -22,11 +22,11 @@ get '/project-table' do
     JSON.generate(@HashCleaner.move_keys(master_sheet))
 end
 
-get '/location/' do
+get '/location/:year' do
   master_sheet = JSON.parse(File.read('public/master.json'))
   @LocationCounter = LocationCounter.new();
   # my_json = @LocationCounter.create_location_object("FGS", master_sheet)
-  my_json = @LocationCounter.location_loop("2016", master_sheet)
+  my_json = @LocationCounter.location_loop(params['year'], master_sheet)
 
   JSON.generate(my_json)
 end
