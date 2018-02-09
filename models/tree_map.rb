@@ -7,15 +7,15 @@ class TreeMap
     @location_array = []
   end
 
-  def get_hash_by_key(year, location, json_file)
-    # json_file = JSON.parse(File.read('../public/master.json'))
+  def tree_map(year, location, json_file)
     counter = 0
     search_key = year+" - "+location
 
+    p search_key
+
     while counter < json_file.length do
       if (json_file[counter].has_key? search_key)
-        p json_file[counter]["Project title"]
-        p json_file[counter][search_key]
+
         if (json_file[counter]["NDP Pillar"] === "Pillar 1: Inclusive Politics" && json_file[counter][search_key] > 0)
           @location_array.push(
             {
@@ -26,10 +26,11 @@ class TreeMap
         end
         counter += 1
       end
+      p @location_array
 
     end
+    return @location_array
 
-    return @location_array.to_json
   end
 end
 

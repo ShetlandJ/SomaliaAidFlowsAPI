@@ -33,7 +33,15 @@ end
 get '/:year/:location' do
   master_sheet = JSON.parse(File.read('public/master.json'))
   @TreeMap = TreeMap.new()
-  my_json = @TreeMap.get_hash_by_key(params['year'], params['location'], master_sheet)
+  my_json = @TreeMap.tree_map(params['year'], params['location'], master_sheet)
+end
+
+get 'treemap/:location/:year' do
+  master_sheet = JSON.parse(File.read('public/master.json'))
+  @TreeMap = TreeMap.new()
+  my_json = @TreeMap.tree_map(params['year'], params['location'], master_sheet)
+
+  JSON.generate(my_json)
 end
 
 get '/envelopes' do
