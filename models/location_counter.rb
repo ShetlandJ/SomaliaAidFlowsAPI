@@ -13,6 +13,7 @@ class LocationCounter
     project_counter = 0
     total = 0
 
+
     while index < json_file.length do
       if (json_file[index][year+" - "+location] > 0)
         total += json_file[index][year+" - "+location]
