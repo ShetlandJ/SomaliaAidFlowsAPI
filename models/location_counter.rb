@@ -3,45 +3,48 @@ require 'json'
 class LocationCounter
 
   def initialize()
+    @valid_place_names = ["FGS", "Benadir", "Galmudug", "Hiirshabelle", "Jubaland", "Puntland", "South West", "Somaliland", "Unattributed"]
     @location_array = []
     @final_array = {}
-    @country_hash = {}
+    @country_array = []
+    # create_location_object("FGS")
   end
 
   def get_location(year, location, json_file)
+    index = 0
+    project_counter = 0
     total = 0
-    counter = 0
-    for hash in json_file
-      hash.each do |key, value|
-        if ((key == year+" - "+"FGS" || key == year+" - "+"fgs") && value > 0)
-          total += value
-          counter += 1
-          if (key == year+" - "+location && value > 0)
-            total += value
-            counter += 1
-          end
-        end
+
+    while index < json_file.length do
+      if (json_file[index][year+" - "+location] > 0)
+        total += json_file[index][year+" - "+location]
+        project_counter += 1
       end
+      index += 1
     end
-    @location_array.push(location => {year => total, "count" => counter})
+    @country_array.push(year => {"total" => total, "count" => project_counter})
+
   end
 
-  def return_all(location, json_file)
+  def create_location_object(location, json_file)
     years = ["2016", "2017", "2018"]
-
+    # for location in @valid_place_names
     for year in years
       get_location(year, location, json_file)
     end
+    @location_array.push(location => @country_array)
+    @country_array = []
+
   end
 
   def location_loop(json_file)
-    locations = ["FGS", "Benadir", "Galmudug", "Hiirshabelle", "Jubaland", "Puntland", "South West", "Somaliland", "Unattributed"]
-
-    for location in locations
-      return_all(location, json_file)
+    for location in @valid_place_names
+      create_location_object(location, json_file)
     end
+
     return @location_array
   end
+
 
 end
 
