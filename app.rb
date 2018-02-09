@@ -8,7 +8,7 @@ require_relative("./models/location_counter")
 
 set :public_folder, 'public'
 get '/' do
-    'Hello world!'
+    erb (:home)
 end
 
 get '/project-page' do
@@ -25,7 +25,6 @@ end
 get '/location/:year' do
   master_sheet = JSON.parse(File.read('public/master.json'))
   @LocationCounter = LocationCounter.new();
-  # my_json = @LocationCounter.create_location_object("FGS", master_sheet)
   my_json = @LocationCounter.location_loop(params['year'], master_sheet)
 
   JSON.generate(my_json)
