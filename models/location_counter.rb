@@ -24,20 +24,20 @@ class LocationCounter
 
   end
 
-  def create_location_object(location, json_file)
-    years = ["2016", "2017", "2018"]
-
-    for year in years
+  def create_location_object(location, json_file, year)
+    # years = ["2016", "2017", "2018"]
+    #
+    # for year in years
       get_location(year, location, json_file)
-    end
+    # end
     @location_array.push(location => @country_array)
     @country_array = []
 
   end
 
-  def location_loop(json_file)
+  def location_loop(year, json_file)
     for location in @valid_place_names
-      create_location_object(location, json_file)
+      create_location_object(location, json_file, year)
     end
 
     return @location_array
