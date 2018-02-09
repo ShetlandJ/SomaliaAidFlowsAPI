@@ -5,7 +5,6 @@ class LocationCounter
   def initialize()
     @valid_place_names = ["FGS", "Benadir", "Galmudug", "Hiirshabelle", "Jubaland", "Puntland", "South West", "Somaliland", "Unattributed"]
     @location_array = []
-    @final_array = {}
     @country_array = []
   end
 
