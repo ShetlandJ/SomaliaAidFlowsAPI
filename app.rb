@@ -45,7 +45,7 @@ get '/test' do
   master_sheet = JSON.parse(File.read('public/master.json'))
   @TreeMap = TreeMap.new()
 
-  my_json = @TreeMap.tree_map("Somaliland", "2016", master_sheet)
+  my_json = @TreeMap.pillar_loop("Somaliland", "2016", master_sheet)
 
   # my_json = @TreeMap.tree_map(params['location'], params['year'], master_sheet)
 end

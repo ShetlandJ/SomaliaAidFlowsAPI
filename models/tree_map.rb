@@ -3,9 +3,10 @@ require 'json'
 class TreeMap
 
   def initialize()
+    @product = []
     @valid_place_names = ["FGS", "Benadir", "Galmudug", "Hiirshabelle", "Jubaland", "Puntland", "South West", "Somaliland", "Unattributed"]
     @valid_pillar_names = [
-      "Pillar 1",
+      "Pillar 1: Inclusive Politics",
       "Pillar 2",
       "Pillar 3",
       "Pillar 4",
@@ -46,7 +47,7 @@ class TreeMap
     @location_array = []
   end
 
-  def tree_map(location, year, json_file)
+  def tree_map(location, year, pillar, json_file)
     sector_array = []
     temp_array = []
 
@@ -62,58 +63,31 @@ class TreeMap
       end
     end
 
-    for pillar in @valid_pillar_names
-      for project in temp_array
-        if (project["NDP Pillar"].include? pillar)
-          @location_array.push(project)
-        end
+    the_array = []
+
+    for project in temp_array
+      if (project["NDP Pillar"].include? pillar)
+        @location_array.push(project)
       end
     end
-
-    # for project in temp_array
-    #   if (project["NDP Pillar"].include? "Pillar 2")
-    #     @location_array.push(project)
-    #   end
-    # end
-    product = {"Pillar 1: Inclusive Politics" => @location_array}
-    # product = {location => @location_array}
-    return product.to_json
+    @product.push(location => {pillar => @location_array})
   end
 
-  # def pillar_loop(location, year, sector, json_file)
-  #   for pillar in @valid_pillar_names
-  #     tree_map(location, year, pillar, sector, json_file)
-  #   end
-  #
-  # end
-  #
-  # def sector_loop(location, year, json_file)
-  #
-  #   for sector in @valid_sector_names
-  #     pillar_loop(location, year, sector, json_file)
-  #   end
-  #
-  # for object in @location_array
-  #   if object["Somaliland"].length == 0
-  #     @location_array.delete(object)
-  #   end
-  # end
-  #     return @location_array.to_json
-  #   end
-  # end
+  def pillar_loop(location, year, json_file)
+    
+    tree_map(location, year, "Pillar 1", json_file)
+    tree_map(location, year, "Pillar 2", json_file)
+    tree_map(location, year, "Pillar 3", json_file)
+    tree_map(location, year, "Pillar 4", json_file)
+    tree_map(location, year, "Pillar 5", json_file)
+    tree_map(location, year, "Pillar 6", json_file)
+    tree_map(location, year, "Pillar 7", json_file)
+    tree_map(location, year, "Pillar 8", json_file)
+
+    return @product.to_json
+
+  end
+
 end
+
 TreeMap.new
-
-
-# while counter < json_file.length do
-#
-#   if (json_file[counter].has_key? search_key)
-#     if ((json_file[counter]["NDP Pillar"].include? pillar) && json_file[counter][search_key] > 0)
-#
-#       temp_array.push(json_file[counter])
-#     end
-#   end
-#
-#   counter += 1
-#
-# end
