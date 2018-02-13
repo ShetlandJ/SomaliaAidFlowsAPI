@@ -84,7 +84,6 @@ class TreeMap
       banana.push(country_array)
     end
 
-    p banana.to_json
   end
 
 
