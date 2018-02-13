@@ -40,8 +40,7 @@ class LocationCounter
       create_location_object(location, json_file, year)
     end
 
-    @location_array.flatten!
-    return @location_array.to_json
+    return @location_array
   end
 
 
