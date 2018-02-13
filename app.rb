@@ -22,12 +22,12 @@ end
 #   JSON.generate(@HashCleaner.move_keys(master_sheet))
 # end
 
-# get '/location/:year' do
-#   master_sheet = JSON.parse(File.read('public/master.json'))
-#   @LocationCounter = LocationCounter.new()
-#   my_json = @LocationCounter.location_loop(params['year'], master_sheet)
-#
-# end
+get '/location/:year' do
+  master_sheet = JSON.parse(File.read('public/master.json'))
+  @LocationCounter = LocationCounter.new()
+  my_json = @LocationCounter.location_loop(params['year'], master_sheet)
+
+end
 
 # get '/:year/:location' do
 #   master_sheet = JSON.parse(File.read('public/master.json'))
